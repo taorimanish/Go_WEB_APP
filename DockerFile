@@ -1,5 +1,11 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.16-alpine
+FROM scratch
+
+ADD alpine-minirootfs-3.11.12-x86_64.tar.gz /
+RUN /bin/sh
+apk add --no-cache --virtual .build-deps bash gcc musl-dev openssl go 
+wget -O go.tgz https://dl.google.com/go/go1.10.3.src.tar.gz 
+
 # create docker directory to store the code 
 WORKDIR /dockerapp
 # copy dependencies to directory 
